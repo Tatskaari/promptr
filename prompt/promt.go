@@ -1,14 +1,11 @@
 package prompt
 
-import "fmt"
+import (
+	"fmt"
+	"promptr/prompt/promptargs"
+)
 
-type PromptArgs interface {
-	Username() string
-	Hostname() string
-	Prompt() string
-	WorkingDirectory() string
-}
 
-func GeneratePrompt(args PromptArgs) string {
+func GeneratePrompt(args promptargs.PromptArgs) string {
 	return fmt.Sprintf("%s@%s:%s %s ", args.Username(), args.Hostname(), args.WorkingDirectory(), args.Prompt())
 }

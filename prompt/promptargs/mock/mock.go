@@ -1,4 +1,4 @@
-package mockpromptargs
+package mock
 
 import (
 	"github.com/stretchr/testify/mock"

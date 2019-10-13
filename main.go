@@ -38,6 +38,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to parse flags: %v", err)
 	}
-	println(options.Hostname)
+
 	println(prompt.GeneratePrompt(new(opts)))
 }
