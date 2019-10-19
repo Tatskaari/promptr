@@ -2,24 +2,41 @@ package prompt
 
 import (
 	"github.com/stretchr/testify/require"
-	argsmock "promptr/prompt/promptargs/mock"
 	"testing"
 )
+
+type argsMock struct {
+	username string
+	hostname string
+	workingDir string
+	prompt string
+}
+
+func (a *argsMock) Username() string {
+	return a.username
+}
+
+func (a *argsMock) Hostname() string {
+	return a.hostname
+}
+
+func (a *argsMock) Prompt() string {
+	return a.workingDir
+}
+
+func (a *argsMock) WorkingDirectory() string {
+	return a.prompt
+}
 
 func TestGeneratePrompt(t *testing.T) {
 	r := require.New(t)
 
-	m := new(argsmock.Mock)
+	m := &argsMock{
+		username:   "user",
+		hostname:   "host",
+		workingDir: "/home/user/dev",
+		prompt:     "$",
+	}
 
-	m.On("Username").Return("user")
-	m.On("Hostname").Return("host")
-	m.On("WorkingDirectory").Return("/home/user/dev")
-	m.On("Prompt").Return("$")
-
-	result := GeneratePrompt(m)
-
-	r.Equal("user@host:/home/user/dev $ ", result)
-
-	m.AssertExpectations(t)
-
+	r.Equal("user@host:/home/user/dev $ ",  GeneratePrompt(m))
 }
