@@ -21,11 +21,11 @@ func (a *argsMock) Hostname() string {
 }
 
 func (a *argsMock) Prompt() string {
-	return a.workingDir
+	return a.prompt
 }
 
 func (a *argsMock) WorkingDirectory() string {
-	return a.prompt
+	return a.workingDir
 }
 
 func TestGeneratePrompt(t *testing.T) {
